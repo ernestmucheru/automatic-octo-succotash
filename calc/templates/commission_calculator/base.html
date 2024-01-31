@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+        background: #ededed;
+        background: linear-gradient(to right, #ededed, #ededed);
+        }
+
+        .card-img-left {
+        width: 45%;
+        /* Link to your background image using in the property below! */
+        background: scroll center url('https://source.unsplash.com/WEQbe2jBg40/414x512');
+        background-size: cover;
+        }
+
+        .btn-login {
+        font-size: 0.9rem;
+        letter-spacing: 0.05rem;
+        padding: 0.75rem 1rem;
+        }
+
+        .btn-google {
+        color: white !important;
+        background-color: #ea4335;
+        }
+
+        .btn-facebook {
+        color: white !important;
+        background-color: #3b5998;
+        }
+    </style>
+    <title>Cellulant Commissions Calculator</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+  <body>
+    {% include 'commission_calculator/navbar.html' %}
+    <div class="container mt-5">
+      <h2 class="mb-4">Commission Calculator</h2>
+        {% block content %}
+
+        {% endblock %}
+    </div>
+    
+    <!-- Include Bootstrap JS and Popper.js from CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.9/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    
+</body>
+
+
+
+</html>
