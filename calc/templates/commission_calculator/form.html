@@ -10,7 +10,7 @@
         <div class="col-lg-6 col-xl-6 mx-auto mb-4">
             <div class="card border-0 shadow rounded-3 overflow-hidden h-100">
                 <div class="card-body p-4 p-sm-5">
-                    <h5 class="card-title text-center mb-5 fw-light fs-5">Register</h5>
+                    <h5 class="card-title text-center mb-5 fw-light fs-5"><strong>Calculate Your Commission</strong></h5>
                     <!-- commission_calculator/templates/commission_calculator/form.html -->
                     <form method="post" action="{% url 'commission_calculator' %}" class="mt-4">
                         {% csrf_token %}
@@ -36,16 +36,22 @@
     
         <!-- Right Column (Result) -->
         <div class="col-lg-6 col-xl-6 mx-auto mb-4">
-            <div class="card border-0 shadow rounded-3 overflow-hidden h-100">
+            <div id="commissionCard" class="card border-0 shadow rounded-3 overflow-hidden h-100">
                 
                 <div class="card-body p-4 p-sm-5">
+                    <h5 class="card-title text-center mb-5 fw-light fs-5"><strong>Your Elligible Commissions</strong></h5>
                     <!-- Display the result here with improved styling -->
                     {% if eligible_gross_profit is not None %}
                         <div class="result-container p-4 p-sm-5 text-center">
-                            <h3 class="result-title text-center mb-4">Your Calculated Commission </h5>
-                            <p class="lead result-value text-center">Based on your achieved Gross Profit, you are elligible for a commission of <strong>${{ eligible_gross_profit|floatformat:2 }}</strong></p>
+                            {% if eligible_gross_profit == 0 %}
+                                <p class="lead result-message">You are not eligible for commissions at the moment.</p>
+                            {% else %}
+                                <h3 class="result-title mb-4">Your Calculated Commission</h3>
+                                <p class="lead result-value">Total Amount = <strong>${{ eligible_gross_profit|floatformat:2 }}</strong></p>
+                            {% endif %}
                         </div>
                     {% endif %}
+
                 </div>
             </div>
         </div>

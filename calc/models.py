@@ -2,7 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Commission(models.Model):
-    persona_choices = [('manager', 'Manager'), ('sales', 'Sales')]
+    persona_choices = [('manager', 'Manager'), ('sales', 'Sales/Account Owner')]
     sales_group_choices = [('checkout', 'Checkout'), ('payouts', 'Payouts'), ('banking', 'Banking')]
 
     persona = models.CharField(max_length=10, choices=persona_choices)
