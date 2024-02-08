@@ -1,65 +1,79 @@
 {% extends 'commission_calculator/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-
-
-
 <section class="mt-4">
-    <div class="row ">
-        <!-- Left Column (Form) -->
-        <div class="col-lg-6 col-xl-6 mx-auto mb-4">
-            <div class="card border-0 shadow rounded-3 overflow-hidden h-100">
-                <div class="card-body p-4 p-sm-5">
-                    <h5 class="card-title text-center mb-5 fw-light fs-5"><strong>Calculate Your Commission</strong></h5>
-                    <!-- commission_calculator/templates/commission_calculator/form.html -->
-                    <form method="post" action="{% url 'commission_calculator' %}" class="mt-4">
-                        {% csrf_token %}
-                        <div class="mb-3">
-                            {{ form.persona|as_crispy_field }}
+        <div class="row">
+            <!-- Left Column (Form) -->
+            <div class="col-md-4 d-flex align-items-stretch">
+                <div class="mx-auto mb-4">
+                    <div class="rounded-3 overflow-hidden h-100">
+                        <div class="p-4 p-sm-5">
+                            <h2 class="mb-5"><strong>Calculator</strong></h2>
+                            <form method="post" action="{% url 'commission_calculator' %}" class="mt-4">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    {{ form.persona|as_crispy_field }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.sales_group|as_crispy_field }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.target_profit|as_crispy_field }}
+                                </div>
+                                <div class="mb-3">
+                                    {{ form.gross_profit|as_crispy_field }}
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-block">Calculate</button>
+                            </form>
                         </div>
-                        <div class="mb-3">
-                            {{ form.sales_group|as_crispy_field }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form.target_profit|as_crispy_field }}
-                        </div>
-                        <div class="mb-3">
-                            {{ form.gross_profit|as_crispy_field }}
-                        </div>
-                        
-                        <button type="submit" class="btn btn-primary">Calculate</button>
-                    </form>
-    
+                    </div>
                 </div>
             </div>
-        </div>
-    
-        <!-- Right Column (Result) -->
-        <div class="col-lg-6 col-xl-6 mx-auto mb-4">
-            <div id="commissionCard" class="card border-0 shadow rounded-3 overflow-hidden h-100">
-                
-                <div class="card-body p-4 p-sm-5">
-                    <h5 class="card-title text-center mb-5 fw-light fs-5"><strong>Your Elligible Commissions</strong></h5>
-                    <!-- Display the result here with improved styling -->
-                    {% if eligible_gross_profit is not None %}
-                        <div class="result-container p-4 p-sm-5 text-center">
-                            {% if eligible_gross_profit == 0 %}
-                                <p class="lead result-message">You are not eligible for commissions at the moment.</p>
-                            {% else %}
-                                <h3 class="result-title mb-4">Your Calculated Commission</h3>
-                                <p class="lead result-value">Total Amount = <strong>${{ eligible_gross_profit|floatformat:2 }}</strong></p>
-                            {% endif %}
-                        </div>
-                    {% endif %}
 
+            <div class="col-md-1 d-flex align-items-center justify-content-center">
+                <!-- Vertical Rule -->
+                <div class="vertical-rule"></div>
+              </div>
+            <div class="col-md-4 d-flex align-items-stretch">
+                <!-- Right Column (Result) -->
+                <div class="mx-auto mb-4">
+                    <div id="commissionCard" class=" rounded-3 overflow-hidden h-100">
+                        
+                        <div class="p-4 p-sm-5">
+                            <h2 class="mb-5  "><strong>Results</strong></h2>
+                            <hr>
+                            <!-- Display the result here with improved styling -->
+                            {% if eligible_gross_profit is not None %}
+                    <div class="result-container p-0">
+                        {% if eligible_gross_profit == 0 %}
+                            <p class="lead result-message ml-4">You are not eligible for commissions at the moment.</p>
+                            <p class="lead result-value ml-4 huge" >Total Amount<br><span style="font-size: 50px; font-weight: 500; color:#005ba0"><strong>${{ eligible_gross_profit|floatformat:2 }}</strong></span></p>
+                        {% else %}
+                            <p class="lead result-value ml-4 huge" >Total Amount<br><span style="font-size: 50px; font-weight: 500; color:#005ba0"><strong>${{ eligible_gross_profit|floatformat:2 }}</strong></span></p>
+                            <hr>
+                        {% endif %}
+                    </div>
+                {% else %}
+                    <!-- Display zero value if no calculation has been done -->
+                    <p class="lead result-value ml-4 huge" >Total Amount<br><span style="font-size: 50px; font-weight: 500; color: #005ba0;"><strong>$0.00</strong></span></p>
+                    <hr>
+                {% endif %}
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        
+            <div class="col-md-3"> 
+            </div>
+        </div>  
 </section>
 
-
-      
-
-
+<div class="row" style="margin-bottom: 10%;">
+    <div class="col-md-8">
+    <hr class="custom-shadow-hr">
+    </div>
+    <div class="col-md-4">
+    </div>
+  </div>
 {% endblock %}
